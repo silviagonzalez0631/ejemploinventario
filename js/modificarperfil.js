@@ -2,30 +2,11 @@
 async function cargarDatosPerfil() {
     try {
         const response = await fetch('../php/verperfil.php');
-        const data = await response.json();
-        return data;
+        const datos = await response.json();
+        return datos;
     } catch (error) {
-        console.error('Error al cargar el perfil:', error);
-        return { success: false, message: 'Error al cargar los datos del perfil' };
-    }
-}
-
-// Función para actualizar perfil
-async function actualizarPerfil(datos) {
-    try {
-        const response = await fetch('../php/actualizarperfil.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datos)
-        });
-        
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error('Error al actualizar el perfil:', error);
-        return { success: false, message: 'Error al actualizar el perfil' };
+        console.error('Error al cargar datos del perfil:', error);
+        return { success: false, message: 'Error al cargar datos del perfil' };
     }
 }
 
@@ -41,7 +22,7 @@ async function mostrarPerfil() {
         document.getElementById('perfilDireccion').textContent = datosPerfil.data.direccion;
         perfilModal.show();
     } else {
-        alert(datosPerfil.message);
+        console.error('Error al mostrar perfil:', datosPerfil.message);
     }
 }
 

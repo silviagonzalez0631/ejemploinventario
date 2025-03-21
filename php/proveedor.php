@@ -1,5 +1,35 @@
 <?php
-// conexion a la base de datos
+require_once 'conexion.php';
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['documentoProveedor'])) {
+        // Crear proveedor
+        $documento = $_POST['documentoProveedor'];
+        $nombre = $_POST['nombreProveedor'];
+        $telefono = $_POST['telefonoProveedor'];
+        $direccion = $_POST['direccionProveedor'];
+        $descripcion = $_POST['descripcionProveedor'];
+
+        $query = "INSERT INTO proveedores (documento, nombre, telefono, direccion, descripcion) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("sssss", $documento, $nombre, $telefono, $direccion, $descripcion);
+
+        $response = [];
+        if ($stmt->execute()) {
+            $response['success'] = true;
+            $response['message'] = "Proveedor creado exitosamente";
+        } else {
+            $response['success'] = false;
+            $response['message'] = "Error al crear el proveedor: " . $stmt->error;
+        }
+
+        echo json_encode($response);
+
+        $stmt->close();
+        $conexion->close();
+    }
+
 include 'conexion.php';
 header('Content-Type: application/json');
 
@@ -30,4 +60,5 @@ if ($action === 'cargarProveedores') {
     echo json_encode($proveedor);
 
     $conexion->close();
+}
 }

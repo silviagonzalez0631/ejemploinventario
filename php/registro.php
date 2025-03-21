@@ -1,58 +1,43 @@
 <?php
-
-include 'conexion.php';
+include 'conexion.php'; // Asegúrate de que la conexión a la base de datos esté configurada correctamente
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$documentoRegistro = $_POST['documentoRegistro'] ?? '';
-$nombreRegistro = $_POST['nombreRegistro'] ?? '';
-$apellidoRegistro = $_POST['apellidoRegistro'] ?? '';
-$contraseñaRegistro = $_POST['contraseñaRegistro'] ?? '';
-$direccionRegistro = $_POST['direccionRegistro'] ?? '';
-$telefonoRegistro = $_POST['telefonoRegistro'] ?? '';
-$correoRegistro = $_POST['correoRegistro'] ?? '';
-$rolRegistro = $_POST['rolRegistro'] ?? '';
+// Log para depuración
+error_log("Solicitud recibida en registro.php");
+error_log("POST data: " . print_r($_POST, true));
 
-// Depuración: Verificar qué campos están vacíos
-$camposVacios = [];
-if (empty($documentoRegistro)) $camposVacios[] = 'documentoRegistro';
-if (empty($nombreRegistro)) $camposVacios[] = 'nombreRegistro';
-if (empty($apellidoRegistro)) $camposVacios[] = 'apellidoRegistro';
-if (empty($contraseñaRegistro)) $camposVacios[] = 'contraseñaRegistro';
-if (empty($direccionRegistro)) $camposVacios[] = 'direccionRegistro';
-if (empty($telefonoRegistro)) $camposVacios[] = 'telefonoRegistro';
-if (empty($correoRegistro)) $camposVacios[] = 'correoRegistro';
-if (empty($rolRegistro)) $camposVacios[] = 'rolRegistro';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener y limpiar datos
+    $documento = trim($_POST['documento'] ?? '');
+    $nombre = trim($_POST['nombre'] ?? '');
+    $apellido = trim($_POST['apellido'] ?? '');
+    $password_sin_hash = trim($_POST['contrasena'] ?? ''); // Asegúrate de que el nombre del campo coincida con el formulario
+    $direccion = trim($_POST['direccion'] ?? '');
+    $telefono = trim($_POST['telefono'] ?? '');
+    $correo = trim($_POST['correo'] ?? '');
+    $rol_usuario = trim($_POST['rol_usuario'] ?? '');
 
-if (!empty($camposVacios)) {
-    echo json_encode(['success' => false, 'message' => 'Todos los campos son requeridos', 'camposVacios' => $camposVacios]);
-    exit;
-}
+    // Validar que los campos no estén vacíos
+    if (empty($documento) || empty($nombre) || empty($apellido) || empty($correo) || empty($password_sin_hash) || empty($rol_usuario)) {
+        echo json_encode(["success" => false, "message" => "Todos los campos son obligatorios."]);
+        exit;
+    }
 
-// Verificar que el rol exista
-$queryRol = "SELECT idroles FROM roles WHERE idroles = ?";
-$stmtRol = $conexion->prepare($queryRol);
-$stmtRol->bind_param("i", $rolRegistro);
-$stmtRol->execute();
-$resultRol = $stmtRol->get_result();
-$rol = $resultRol->fetch_assoc();
-
-if (!$rol) {
-    echo json_encode(['success' => false, 'message' => 'El rol seleccionado no existe']);
-    exit;
-}
-
-// Hash de la contraseña
-$contraseñaHash = password_hash($contraseñaRegistro, PASSWORD_BCRYPT);
-
-$query = "INSERT INTO usuarios (documento, nombre, apellido, contrasena, direccion, telefono, correo, IDRol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-$stmt = $conexion->prepare($query);
-$stmt->bind_param("issssssi", $documentoRegistro, $nombreRegistro, $apellidoRegistro, $contraseñaHash, $direccionRegistro, $telefonoRegistro, $correoRegistro, $rolRegistro);
-
-try {
-    $stmt->execute();
-    echo json_encode(['success' => true, 'message' => 'Registro exitoso']);
-} catch (mysqli_sql_exception $e) {
-    error_log("Error en registro: " . $e->getMessage());
-    echo json_encode(['success' => false, 'message' => 'Error al registrar el usuario']);
+    // Preparar la inserción
+    $stmt = $pdo->prepare("INSERT INTO usuarios (documento, nombre, apellido, contrasena, direccion, telefono, correo, rol_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    if ($stmt->execute([$documento, $nombre, $apellido, $password_sin_hash, $direccion, $telefono, $correo, $rol_usuario])) {
+        echo json_encode(["success" => true, "message" => "Usuario registrado correctamente."]);
+    } else {
+        error_log("Error al registrar el usuario: " . implode(", ", $stmt->errorInfo())); // Captura el error
+        echo json_encode(["success" => false, "message" => "Error al registrar el usuario."]);
+    }
+} else {
+    echo json_encode(["success" => false, "message" => "Método no permitido."]);
 }
 ?>

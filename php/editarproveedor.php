@@ -13,7 +13,7 @@ if (isset($data['id'], $data['documento'], $data['nombre'], $data['telefono'], $
 
     $query = "UPDATE proveedores SET documento = ?, nombre = ?, telefono = ?, direccion = ?, descripcion = ? WHERE idproveedores = ?";
     $stmt = $conexion->prepare($query);
-    $stmt->bind_param("sssssi", $documento, $nombre, $telefono, $direccion, $descripcion, $id);
+    $stmt->bind_param("ssi", $documento, $nombre, $telefono, $direccion, $descripcion, $id);
 
     $response = [];
     if ($stmt->execute()) {

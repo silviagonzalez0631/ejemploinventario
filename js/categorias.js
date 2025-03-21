@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', cargarCategorias);
-
+cargarCategorias();
 function cargarCategorias() {
     const action = "cargarCategorias";
     fetch('../php/categoria.php', {
@@ -74,7 +73,7 @@ document.getElementById('editarCategoriaForm').addEventListener('submit', functi
     const nombre = document.getElementById('editarNombreCategoria').value;
     const descripcion = document.getElementById('editarDescripcionCategoria').value;
 
-    fetch(`../php/editarcategoria.php`, {
+    fetch(`../php/editarcategorias.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

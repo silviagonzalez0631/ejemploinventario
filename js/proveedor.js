@@ -34,7 +34,7 @@ function cargarProveedores() {
 
 function abrirModalEditar(id) {
     // Obtener los datos del proveedor y llenar el formulario del modal
-    fetch(`/ejemploinventario/php/proveedor.php?id=${id}`)
+    fetch(`../php/proveedor.php?id=${id}`)
     .then(response => response.json())
     .then(proveedor => {
         document.getElementById('editarIdProveedor').value = proveedor.idproveedores;
@@ -59,7 +59,7 @@ function eliminarProveedor(id) {
         .then(data => {
             if (data.success) {
                 alert('Proveedor eliminado exitosamente');
-                // Recargar la página para actualizar la lista de proveedores
+                // Recargar la lista de proveedores
                 cargarProveedores();
             } else {
                 alert('Error al eliminar el proveedor');

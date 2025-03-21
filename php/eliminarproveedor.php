@@ -11,6 +11,7 @@ if ($stmt->execute()) {
     $response['success'] = true;
 } else {
     $response['success'] = false;
+    $response['error'] = $stmt->error; 
 }
 
 echo json_encode($response);

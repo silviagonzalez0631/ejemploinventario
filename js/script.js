@@ -1,116 +1,122 @@
-let intentosRestantes = 3;
-
-// Elementos del DOM para la transición
-const container = document.getElementById('container');
-const registerBtn = document.getElementById('register');
-const loginBtn = document.getElementById('login');
-
-// Verificar si los elementos existen antes de añadir eventos
-if (registerBtn && container) {
-    registerBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        container.classList.add('right-panel-active');
-    });
-}
-
-if (loginBtn && container) {
-    loginBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        container.classList.remove('right-panel-active');
-        // Limpiar los campos del formulario de registro
-        const registerForm = document.getElementById('register-form');
-        if (registerForm) {
-            registerForm.reset();
-        }
-    });
-}
-
-// Función de verificación de login
-async function verificarLogin() {
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-    let mensaje = document.getElementById("message");
-
-    try {
-        const response = await fetch('../php/iniciarsesion.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                'documento': username,
-                'contrasena': password
-            })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            mensaje.style.color = "blue";
-            mensaje.textContent = "¡Inicio de sesión exitoso!";
-            window.location.href = "../html/index.php";
-        } else {
-            intentosRestantes--;
-            mensaje.style.color = "red";
-            mensaje.textContent = `Usuario o contraseña incorrectos. Intentos restantes: ${intentosRestantes}`;
-            
-            if (intentosRestantes === 0) {
-                mensaje.textContent = "Cuenta bloqueada. Intenta más tarde";
-                document.getElementById("username").disabled = true;
-                document.getElementById("password").disabled = true;
-            }
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        mensaje.style.color = "red";
-        mensaje.textContent = "Error al procesar el inicio de sesión. Por favor, intenta nuevamente.";
+console.log('script.js cargado correctamente');
+// Función para mostrar mensajes
+function mostrarMensaje(elementId, mensaje, color) {
+    const elemento = document.getElementById(elementId);
+    if (elemento) {
+        elemento.textContent = mensaje;
+        elemento.style.color = color;
+        elemento.style.display = mensaje ? 'block' : 'none';
     }
 }
 
-// Manejador del formulario de inicio de sesión
-const loginForm = document.getElementById("login-form");
-if (loginForm) {
-    loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        verificarLogin();
-    });
+// Función para iniciar sesión
+async function iniciarSesion(formData) {
+    try {
+        mostrarMensaje("iniciarsesionMessage", "Procesando inicio de sesión...", "blue");
+        
+        const response = await fetch('../php/iniciarsesion.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const resultado = await response.json();
+        
+        if (resultado.success) {
+            mostrarMensaje("loginMessage", "¡Inicio de sesión exitoso! Redirigiendo...", "green");
+            setTimeout(() => {
+                window.location.href = "../html/index.php";
+            }, 2000);
+        } else {
+            mostrarMensaje("loginMessage", resultado.message || "Error en el inicio de sesión", "red");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        mostrarMensaje("loginMessage", "Error al procesar el inicio de sesión", "red");
+    }
 }
 
-// Manejador del formulario de registro mejorado
-const registerForm = document.getElementById("register-form");
-if (registerForm) {
-    registerForm.addEventListener("submit", async function(e) {
-        e.preventDefault();
+// Función para cargar datos del perfil
+async function cargarDatosPerfil() {
+    try {
+        const response = await fetch('../php/verperfil.php');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error al cargar el perfil:', error);
+        return { success: false, message: 'Error al cargar los datos del perfil' };
+    }
+}
+
+// Función para actualizar perfil
+async function actualizarPerfil(datos) {
+    try {
+        const response = await fetch('../php/actualizarperfil.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        });
+        
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error al actualizar el perfil:', error);
+        return { success: false, message: 'Error al actualizar el perfil' };
+    }
+}
+
+// Formulario de inicio de sesión
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+    loginForm.onsubmit = function(event) {
+        event.preventDefault();
         const formData = new FormData(this);
-        const signupMessage = document.getElementById("signupMessage");
+        iniciarSesion(formData);
+    };
+}
 
-        try {
-            const response = await fetch('../php/registro.php', {
-                method: 'POST',
-                body: formData
-            });
+// Exportar funciones necesarias para el perfil
+window.cargarDatosPerfil = cargarDatosPerfil;
+window.actualizarPerfil = actualizarPerfil;
 
-            const result = await response.json();
+async function guardarCambios() {
+    try {
+        const inputs = document.querySelectorAll('.modal-body input.form-control');
+        const datos = {
+            nombres: inputs[0].value,
+            apellidos: inputs[1].value,
+            correo: inputs[2].value,
+            celular: inputs[3].value
+        };
 
-            if(result.success) {
-                signupMessage.style.color = "green";
-                signupMessage.textContent = "¡Registro exitoso! Ya puedes iniciar sesión";
-                setTimeout(() => {
-                    container.classList.remove('right-panel-active');
-                    this.reset(); // Limpiar el formulario
-                }, 1500);
-            } else {
-                signupMessage.style.color = "red";
-                if(result.message.includes("correo o documento")) {
-                    signupMessage.textContent = "Este correo o documento ya está registrado. Por favor, usa datos diferentes.";
-                } else {
-                    signupMessage.textContent = result.message;
-                }
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            signupMessage.style.color = "red";
-            signupMessage.textContent = "Error al procesar el registro. Por favor, intenta nuevamente.";
+        const resultado = await actualizarPerfil(datos);
+        
+        if (resultado.success) {
+            alert(resultado.message);
+            const modalElement = document.getElementById('perfilModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+            window.location.reload();
+        } else {
+            alert(resultado.message || 'Error al actualizar el perfil');
         }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al guardar los cambios');
+    }
+}
+
+// Agregar esta función para habilitar la edición
+function habilitarEdicion() {
+    const campos = ['perfilNombre', 'perfilApellido', 'perfilCorreo', 'perfilTelefono'];
+    
+    campos.forEach(campo => {
+        const elemento = document.getElementById(campo);
+        const valor = elemento.textContent;
+        elemento.innerHTML = `<input type="text" class="form-control" value="${valor}">`;
     });
+
+    document.getElementById('btnEditar').style.display = 'none';
+    document.getElementById('btnGuardar').style.display = 'inline';
 }

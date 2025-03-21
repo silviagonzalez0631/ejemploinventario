@@ -1,0 +1,426 @@
+html body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('../imagenes/fondo.jpg');
+}
+.main-image{
+    position: relative;
+    background: url(../imagenes/freepik__expand__22951.png) no-repeat center;
+    background-size: cover;
+    height: 500px;
+    overflow: hidden;
+
+}
+
+.container-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+.navbar {
+    padding: 1rem 1.5rem; 
+    background-image: linear-gradient(white, rgb(195, 130, 238));
+}
+
+.navbar .nav-link, .navbar .navbar-brand {
+    color: #000000; /* Cambia este valor al color de los enlaces */
+}
+
+/* Cambia el color de los elementos del menú desplegable */
+.dropdown-menu {
+    background-color: #0066cc; /* Cambia este valor al color de fondo del menú desplegable */
+}
+
+.dropdown-menu .dropdown-item {
+    color: #000000; /* Cambia este valor al color de texto en el menú desplegable */
+}
+
+/* Cambia el color de fondo y texto de los elementos del menú al pasar el cursor */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #cd0cdf; /* Cambia este valor al color de fondo al pasar el mouse */
+    color: #ffffff; /* Cambia este valor al color de texto al pasar el mouse */
+}
+
+
+.navbar-brand,
+.nav-link {
+    font-size: 1.25rem; /* Ajusta el tamaño de la fuente */
+}
+
+
+.dropdown-menu .dropdown-item {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem; 
+}
+
+.card-1 img{
+    width: 100%;
+    height: 280px;
+}
+
+.card-2 img{
+    width: 100%;
+    height: 280px;
+}
+.card-3 img{
+    width: 100%;
+    height: 280px;
+}
+
+.contenedor-registro{
+
+    background-color: white;
+    border-radius: 25px;
+    width: 90%;
+    margin: 50px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(1, 56, 82);
+}
+
+h1{
+    text-align: center;
+    color: rgb(20, 78, 165);
+}
+
+.form-group{
+    margin-bottom: 16px;
+
+}
+
+
+label{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input{
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button{
+    background-color: rgb(144, 218, 241);
+    border-radius: 10px;
+    border-color: rgb(43, 107, 226);
+    height: 30px;
+
+}
+/*esteeeeeeee*/
+.top-categories{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.container-categories{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 3rem;
+    
+}
+
+.card-category{
+    height: 2orem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    gap: 2rem;
+}
+
+
+.content-text {
+    text-align: center;
+    font-size: 55px;
+    line-height: 70px;
+    color: var(--dark-color);
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    padding: 0 100px;
+}
+.container-categories{
+        background-image: linear-gradient(
+        rgba(0, 0, 0, 0.404),
+        rgba(0, 0, 0, 0.501)),
+        url(imagenes/imagen2.jpg);
+       background-position: center center;
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-attachment: fixed;
+       padding: 100px;
+       filter: brightness(100%);
+       
+    }
+.container-categories a{
+        text-decoration: none;
+    }
+
+
+
+.footer {
+    background-color:  rgba(198, 126, 212, 0.753);
+    ;
+    text-align: left;
+
+}
+
+.container-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Reducido de 2rem a 1rem */
+    padding: 1rem; /* Reducido de 1.5rem a 1rem */
+}
+
+.menu-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 15rem; /* Reducido de 20rem a 15rem */
+    gap: 1rem; /* Reducido de 1.5rem a 1rem */
+    justify-items: center;
+}
+
+.title-footer {
+    font-weight: 600;
+    font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.contact-info,
+.information,
+.my-account,
+.newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reducido de 1rem a 0.5rem */
+}
+
+.contact-info ul,
+.information ul,
+.my-account ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem; /* Reducido de 0.5rem a 0.3rem */
+}
+
+.contact-info ul li,
+.information ul li,
+.my-account ul li {
+    list-style: none;
+    color: #fff;
+    font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+    font-weight: 300;
+}
+
+.information ul li a,
+.my-account ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 300;
+}
+
+.information ul li a:hover,
+.my-account ul li a:hover {
+    color: var(--dark-color);
+}
+
+.content p {
+    font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+    color: #fff;
+    font-weight: 300;
+}
+
+.content input {
+    outline: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #d2b495;
+    cursor: pointer;
+    padding: 0.2rem 0 0.5rem; /* Reducido el padding */
+    color: var(--dark-color);
+    display: block;
+    margin-bottom: 1rem; /* Reducido de 1.5rem a 1rem */
+    margin-top: 0.5rem; /* Reducido de 1rem a 0.5rem */
+    width: 100%;
+    font-family: inherit;
+}
+
+.content input::-webkit-input-placeholder {
+    color: #eee;
+}
+
+.content button {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem; /* Reducido el padding de 0.5rem 1.5rem a 0.4rem 1rem */
+    border-radius: 0.5rem; /* Reducido de 1rem a 0.5rem */
+    font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.content button:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem; /* Reducido de 1rem a 0.5rem */
+    border-top: 1px solid #d2b495;
+}
+
+copyright p {
+    font-weight: 400;
+    font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+}
+
+
+
+.container-social{
+    margin: 0;
+    padding: 0;
+
+}
+.container-social{
+    background-color: var(--primary-color);
+}
+
+.container-social{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;    
+border-radius: 40px;
+display: flex;
+
+}
+
+.container-social ul {
+    list-style: none;
+}
+
+.container-social ul li{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    margin: 0 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 5px solid var(--background-color);
+    float: left;
+    transition: all 0.5s ease;
+}
+
+
+
+
+.container-social ul li .fa{
+    color: var(--background-color);
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.facebook{
+    border: 5px solid #3b5990;
+    box-shadow: 0 0 15px #3b5998;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.facebook{
+    border: 5px solid #3b5990;
+    box-shadow: 0 0 15px #3b5998;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.whatsapp{
+    border: 5px solid #4dc247;
+    box-shadow: 0 0 15px #4dc247;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.whatsapp{
+    border: 5px solid #4dc247;
+    box-shadow: 0 0 15px #4dc247;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.google{
+    border: 5px solid #da5948;
+    box-shadow: 0 0 15px #da5948;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.google{
+    border: 5px solid #da5948;
+    box-shadow: 0 0 15px #da5948;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.youtube{
+    border: 5px solid #ce250e;
+    box-shadow: 0 0 15px #ce250e;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.youtube{
+    border: 5px solid #ce250e;
+    box-shadow: 0 0 15px #ce250e;
+    transition: all 0.5s ease;
+}
+.container-social ul li:hover.instagram{
+    border: 5px solid #bc2a8d;
+    box-shadow: 0 0 15px #bc2a8d;
+    transition: all 0.5s ease;
+}
+
+.container-social ul li:hover.instagram{
+    border: 5px solid #bc2a8d;
+    box-shadow: 0 0 15px #bc2a8d;
+    transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 640px) {
+    .container-social{
+        width: 250px;
+    }
+    .container-social ul li{
+        margin-top: 10px;
+    }
+    .container-social ul li.google{
+        margin-left: 60px;
+    }
+    
+}
+
+@media screen and (max-width: 340px){
+    .container-social {
+        width: 150px;
+    }
+
+    .container-social ul li{
+        margin: 15px;
+    }
+    .container-social ul li.google{
+        margin-left: 15px;
+    }
+
+}

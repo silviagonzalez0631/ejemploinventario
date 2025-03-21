@@ -2,59 +2,58 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once 'conexion.php';
+include_once 'conexion.php';
 
 try {
-    // Obtener datos del formulario
+    // Obtener los datos del formulario
     $documento = $_POST['documento'];
-    $contrasena = $_POST['contrasena'];
+    $password_usuario = $_POST['contrasena'];
 
-    // Validar que todos los campos estén presentes
-    if (empty($documento) || empty($contrasena)) {
+    if (empty($documento) || empty($password_usuario)) {
         echo json_encode(['success' => false, 'message' => 'Todos los campos son requeridos']);
         exit;
     }
 
     // Buscar usuario por documento
-    $query = "SELECT * FROM usuarios WHERE documento = ?";
-    $stmt = $conexion->prepare($query);
-    $stmt->bind_param("s", $documento); // Cambié "i" a "s" porque documento es un string
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $usuario = $result->fetch_assoc();
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE documento = ?");
+    $stmt->execute([$documento]);
+    $usuario = $stmt->fetch();
 
     if ($usuario) {
-        // Depuración: Verificar la contraseña recuperada y la ingresada
-        error_log("Contraseña ingresada: " . $contrasena);
-        error_log("Contraseña almacenada: " . $usuario['contrasena']);
+        // Log para depuración
+        error_log("Usuario encontrado: " . print_r($usuario, true));
 
         // Verificar la contraseña
-        if (password_verify($contrasena, $usuario['contrasena'])) {
+        if ($password_usuario === $usuario['contrasena']) {
+            // Log para depuración
+            error_log("Contraseña verificada correctamente para el usuario: " . $usuario['documento']);
+
             // Iniciar sesión
             $_SESSION['usuario_id'] = $usuario['idusuario'];
             $_SESSION['documento'] = $usuario['documento'];
-            $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['correo'] = $usuario['correo'];
-
+            $_SESSION['rol_usuario'] = $usuario['rol_usuario']; 
             echo json_encode([
                 'success' => true,
                 'message' => 'Inicio de sesión exitoso'
             ]);
+            
         } else {
-            error_log("Contraseña incorrecta");
+            // Log para depuración
+            error_log("Contraseña incorrecta para el usuario: " . $usuario['documento']);
+            error_log("Contraseña ingresada: " . $password_usuario);
+            error_log("Contraseña almacenada: " . $usuario['contrasena']);
             echo json_encode([
                 'success' => false, 
                 'message' => 'Contraseña incorrecta'
             ]);
         }
     } else {
-        error_log("No existe un usuario con ese documento");
         echo json_encode([
             'success' => false, 
             'message' => 'No existe un usuario con ese documento'
         ]);
     }
-} catch (mysqli_sql_exception $e) {
+} catch(PDOException $e) {
     error_log("Error en login: " . $e->getMessage());
     echo json_encode([
         'success' => false, 

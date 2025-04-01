@@ -1,7 +1,7 @@
 cargarProductos();
 function cargarProductos() {
     const action = "cargarProductos";
-    fetch('../php/producto.php', {
+    fetch('../models/php/producto.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ document.getElementById('editarProductoForm').addEventListener('submit', functio
     const categoria = document.getElementById('editarCategoriaProducto').value;
     const proveedor = document.getElementById('editarProveedorProducto').value;
 
-    fetch(`../php/editarproducto.php`, {
+    fetch(`../models/php/editarproducto.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

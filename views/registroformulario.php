@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="../css/estilillosderegistro.css">
-    <link rel="icon" href="../imagenes/gratis-png-flores-rosadas-gratis-flor-morada-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="../public/css/estilillosderegistro.css">
+    <link rel="icon" href="../public/imagenes/gratis-png-flores-rosadas-gratis-flor-morada-removebg-preview.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -15,17 +15,16 @@
 <body>
     <div id="video-background">
         <video autoplay muted loop>
-            <source src="../imagenes/videomorado.mp4" type="video/mp4">
+            <source src="../public/imagenes/videomorado.mp4" type="video/mp4">
         </video>
     </div>
     <section class="form-register">
-        <a href="principal.html">
-            <img src="../imagenes/pedido.png" alt="hola">
+            <img src="../public/imagenes/pedido.png" alt="hola">
         </a>
         <h2>¿No tienes cuenta?</h2>
         <h4>¡Registrate para comenzar!</h4>
 
-        <form action="../php/registro.php" method="POST">
+        <form action="../models/php/registro.php" method="POST">
         
             <label for="documentoRegistro">Documento:</label>
             <input class="controls" type="text" name="documento" id="documentoRegistro" placeholder="Ingrese su documento." required>
@@ -59,7 +58,7 @@
             <p>Estoy de acuerdo con <a href="#">Términos y condiciones</a></p>
 
             <button class="botons" type="submit">Registrarse</button>
-            <p><a href="../html/iniciarsesionLOGIN.html">¿Ya tengo cuenta?</a></p>
+            <p><a href="../views/iniciarsesionLOGIN.php">¿Ya tengo cuenta?</a></p>
         </form>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

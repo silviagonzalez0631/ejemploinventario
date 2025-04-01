@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../config/conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = json_decode(file_get_contents('php://input'), true)['action'] ?? '';
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imagen = $_FILES['imagenProducto']['name'];
 
         // Mover la imagen a la carpeta de imágenes
-        $rutaImagen = "../imagenesProductos/" . basename($imagen);
+        $rutaImagen = "../public/imagenesProductos/" . basename($imagen);
         move_uploaded_file($_FILES['imagenProducto']['tmp_name'], $rutaImagen);
 
         $query = "INSERT INTO productos (nombre, descripcion, precio, IDCategoria, IDProveedor, imagen) VALUES (?, ?, ?, ?, ?, ?)";
@@ -61,3 +61,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conexion->close();
 }
+
+?>

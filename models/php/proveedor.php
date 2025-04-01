@@ -1,5 +1,5 @@
 <?php
-require_once 'conexion.php';
+require_once '../config/conexion.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conexion->close();
     }
 
-include 'conexion.php';
+include '../config/conexion.php';
 header('Content-Type: application/json');
 
 $action = json_decode(file_get_contents('php://input'), true)['action'] ?? '';
@@ -62,3 +62,5 @@ if ($action === 'cargarProveedores') {
     $conexion->close();
 }
 }
+
+?>

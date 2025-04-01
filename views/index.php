@@ -1,4 +1,4 @@
-<?php include '../html/navbar.php'; ?> <!-- Incluye el navbar aquí -->
+<?php include '../views/navbar.php'; ?> <!-- Incluye el navbar aquí -->
 
 </header>
 
@@ -27,7 +27,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="card-1">
-            <img src="../imagenes/Misión.gif" class="card-img-top" alt="Misión">
+            <img src="../public/imagenes/Misión.gif" class="card-img-top" alt="Misión">
             <div class="card-body">
                 <br>
                 <h5>Nuestra Misión</h5>
@@ -60,7 +60,7 @@
     <!-- Visión -->
     <div class="col-md-4">
         <div class="card-2">
-            <img src="../imagenes/Visión.gif" class="card-img-top" alt="Visión">
+            <img src="../public/imagenes/Visión.gif" class="card-img-top" alt="Visión">
             <div class="card-body">
                 <br>
                 <h5>Nuestra Visión</h5>
@@ -92,7 +92,7 @@
     <!-- Valores -->
     <div class="col-md-4">
         <div class="card-3">
-            <img src="../imagenes/Valores.gif" class="card-img-top" alt="Valores">
+            <img src="../public/imagenes/Valores.gif" class="card-img-top" alt="Valores">
             <div class="card-body">
                 <br>
                 <h5>Nuestros Valores</h5>
@@ -222,13 +222,13 @@
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-            <img src="../imagenes/imagen1.jpg" class="d-block w-50 mx-auto" alt="1">
+            <img src="../public/imagenes/imagen1.jpg" class="d-block w-50 mx-auto" alt="1">
         </div>
         <div class="carousel-item">
-            <img src="../imagenes/imagen2.jpg" class="d-block w-50 mx-auto" alt="2">
+            <img src="../public/imagenes/imagen2.jpg" class="d-block w-50 mx-auto" alt="2">
         </div>
         <div class="carousel-item">
-            <img src="../imagenes/imagen3.jpg" class="d-block w-50 mx-auto" alt="3">
+            <img src="../public/imagenes/imagen3.jpg" class="d-block w-50 mx-auto" alt="3">
         </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -256,7 +256,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card-1">
-                <img src="../imagenes/productos.png" class="card-img-top" alt="ejemplo de tarjeta1">
+                <img src="../public/imagenes/productos.png" class="card-img-top" alt="ejemplo de tarjeta1">
                 <div class="card-body">
                     <h5>Nuestros Productos</h5>
                     <p class="card-text">Los productos podemos visualizarlos según la disponibilidad que se encuentre según los administradores.</p>
@@ -269,7 +269,7 @@
 
         <div class="col-md-4">
             <div class="card-2">
-                <img src="../imagenes/usuarios.png" class="card-img-top" alt="ejemplo de tarjeta2">
+                <img src="../public/imagenes/usuarios.png" class="card-img-top" alt="ejemplo de tarjeta2">
                 <div class="card-body">
                     <h5>Nuestros Usuarios</h5>
                     <p class="card-text">Los usuarios se pueden registrar con el fin de visyualixzar los productos y hacer pedidos en nuestra tienda.</p>
@@ -282,7 +282,7 @@
 
         <div class="col-md-4">
             <div class="card-3">
-                <img src="../imagenes/pedido.png" class="card-img-top" alt="ejemplo de tarjeta3">
+                <img src="../public/imagenes/pedido.png" class="card-img-top" alt="ejemplo de tarjeta3">
                 <div class="card-body">
                     <h5>Nuestros Pedidos</h5>
                     <p class="card-text">Son realizados con por los usuarios dependiendo lo que deseen.</p>
@@ -367,4 +367,4 @@
 
 
 
-<?php include '../html/footer.php'; ?> <!-- Incluye el footer aquí -->
+<?php include '../views/footer.php'; ?> <!-- Incluye el footer aquí -->

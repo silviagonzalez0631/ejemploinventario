@@ -1,4 +1,4 @@
-<?php include '../html/navbar.php'; ?> <!-- Incluye el navbar aquí -->
+<?php include '../views/navbar.php'; ?> <!-- Incluye el navbar aquí -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
         </thead>
         <tbody id="listaCategorias">
         <?php
-        include '../php/conexion.php';
+        include '../config/conexion.php';
         $query = "SELECT * FROM categorias";
         $result = $conexion->query($query);
         while ($row = $result->fetch_assoc()) {
@@ -71,13 +71,13 @@
     </div>
 </div>
 
-    <?php include '../html/footer.php'; ?> <!-- Incluye el footer aquí -->
+    <?php include '../views/footer.php'; ?> <!-- Incluye el footer aquí -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../js/categorias.js"></script>
+    <script src="../public/js/categorias.js"></script>
     <script>
         function eliminarCategoria(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
-                window.location.href = '../php/eliminarCategorias.php?id=' + id;
+                window.location.href = '../models/php/eliminarCategorias.php?id=' + id;
             }
         }
     </script>

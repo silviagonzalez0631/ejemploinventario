@@ -1,7 +1,7 @@
 cargarCategorias();
 function cargarCategorias() {
     const action = "cargarCategorias";
-    fetch('../php/categoria.php', {
+    fetch('../models/php/categoria.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ function abrirModalEditar(id) {
 function eliminarCategoria(id) {
     if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
         // Realizar una solicitud AJAX para eliminar la categoría
-        fetch(`../php/eliminarcategorias.php?id=${id}`, {
+        fetch(`../models/php/eliminarcategorias.php?id=${id}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
@@ -74,7 +74,7 @@ document.getElementById('formularioEditar').addEventListener('submit', function(
     const nombre = document.getElementById('nombreCategoria').value;
     const descripcion = document.getElementById('descripcionCategoria').value;
 
-    fetch(`../php/editarcategorias.php`, {
+    fetch(`..models/php/editarcategorias.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

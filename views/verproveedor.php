@@ -1,4 +1,4 @@
-<?php include '../html/navbar.php'; ?> <!-- Incluye el navbar aquí -->
+<?php include '../views/navbar.php'; ?> <!-- Incluye el navbar aquí -->
 
 </header>
 
@@ -20,7 +20,7 @@
         </thead>
         <tbody id="listaProveedores">
             <?php
-            include '../php/conexion.php';
+            include '../config/conexion.php';
             $query = "SELECT * FROM proveedores";
             $result = $conexion->query($query);
             while ($row = $result->fetch_assoc()) {
@@ -42,13 +42,13 @@
     </table>
 </div>
 
-<?php include '../html/footer.php'; ?> <!-- Incluye el footer aquí -->
+<?php include '../views/footer.php'; ?> <!-- Incluye el footer aquí -->
 <?php include '../html/modaleditar.php'; ?> <!-- Incluye el modal aquí -->
 
 <script>
     function eliminarProveedores(id) {
         if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
-            window.location.href = '../php/eliminarproveedor.php?id=' + id;
+            window.location.href = '../models/php/eliminarproveedor.php?id=' + id;
         }
     }
 </script>

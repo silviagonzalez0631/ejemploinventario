@@ -2,7 +2,7 @@
 proveedoresCategorias();
 function proveedoresCategorias() {
     const action = "cargarProveedoresCategorias";
-    fetch('../php/producto.php', {
+    fetch('../models/php/producto.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

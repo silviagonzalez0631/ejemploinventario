@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="../css/estilitosdeinicio.css">
+    <link rel="stylesheet" href="../public/css/estilitosdeinicio.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -14,12 +14,11 @@
 <body>
 <div id="video-background">
         <video autoplay muted loop>
-            <source src="../imagenes/videomorado.mp4" type="video/mp4">
+            <source src="../public/imagenes/videomorado.mp4" type="video/mp4">
         </video>
     </div>
     <section class="form-register">
-        <a href="principal.html">
-            <img src="../imagenes/pedido.png" alt="hola">
+            <img src="../public/imagenes/pedido.png" alt="hola">
         </a>
         <h2>Inicia tu sesion</h2>
             <form id="login-form">
@@ -30,7 +29,7 @@
                 <input class="controls" type="password" name="contrasena" id="contrasena" placeholder="Ingrese su contraseña." required>
                 
                 <input class="botons" type="submit" value="Iniciar sesión">
-                <p><a href="../html/registroformulario.php">¿No tengo cuenta?</a></p>
+                <p><a href="../views/registroformulario.php">¿No tengo cuenta?</a></p>
             </form>
             <!-- Elemento para mostrar mensajes del sistema -->
             <div id="loginMessage"></div>
@@ -40,5 +39,5 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../js/script.js"></script>
+    <script src="../public/js/script.js"></script>
 </body>

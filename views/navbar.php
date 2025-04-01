@@ -8,16 +8,16 @@ $rol = $_SESSION['rol_usuario'] ?? null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="icon" href="imagenes/imagen_2024-11-08_105645304-removebg-preview.png" type="image/x-icon">
+    <link rel="icon" href="../public/imagenes/imagen_2024-11-08_105645304-removebg-preview.png" type="image/x-icon">
 </head>
 <body>
 <!--barra de navegación-->
 <nav class="navbar navbar-expand-lg body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../html/index.php">Navbar</a>
+        <a class="navbar-brand" href="../views/index.php">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +33,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProveedorModal">Crear proveedor</a></li>
                             <?php endif; ?>
                             <?php if ($rol == 'administrador'): ?>
-                                <li><a class="dropdown-item" href="verproveedor.php">Listar Proveedor</a></li>
+                                <li><a class="dropdown-item" href="../views/verproveedor.php">Listar Proveedor</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -46,7 +46,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearCategoriaModal">Crear categoria</a></li>
                             <?php endif; ?>
                             <?php if ($rol == 'administrador'): ?>
-                                <li><a class="dropdown-item" href="verCategorias.php">Listar categoria</a></li>
+                                <li><a class="dropdown-item" href="../views/verCategorias.php">Listar categoria</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -59,7 +59,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProductoModal">Crear Producto</a></li>
                             <?php endif; ?>
                             <?php if ($rol == 'administrador' || $rol == 'comprador'): ?>
-                                <li><a class="dropdown-item" href="verproductos.php">Listar Productos</a></li>
+                                <li><a class="dropdown-item" href="../views/verproductos.php">Listar Productos</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -70,7 +70,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                     </button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../php/cerrarsesion.php">Cerrar Sesión</a>
+                <a class="nav-link" href="../models/php/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
             </ul>
             <!-- Mostrar el tipo de usuario en la barra de navegación -->
@@ -91,7 +91,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
             </div>
             <div class="modal-body">
                 <div class="text-center mb-4">
-                    <img src="../imagenes/imagen1.jpg" class="rounded-circle" alt="Foto de perfil" style="width: 150px; height: 150px; object-fit: cover;">
+                    <img src="../public/imagenes/imagen1.jpg" class="rounded-circle" alt="Foto de perfil" style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -120,7 +120,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../php/categoria.php" method="POST">
+                <form action="../models/php/categoria.php" method="POST">
                     <label for="nombreCategoria">Nombre de la Categoría:</label>
                     <input class="controls" type="text" name="nombreCategoria" id="nombreCategoria" placeholder="Ingrese el nombre de la categoría." required>
                     
@@ -144,7 +144,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../php/proveedor.php" method="POST">
+                <form action="../models/php/proveedor.php" method="POST">
                     <label for="documentoProveedor">Documento:</label>
                     <input class="controls" type="number" name="documentoProveedor" id="documentoProveedor" placeholder="Ingrese el documento del proveedor." required>
 
@@ -177,7 +177,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../php/producto.php" method="POST" enctype="multipart/form-data">
+                <form action="../models/php/producto.php" method="POST" enctype="multipart/form-data">
                     <label for="nombreProducto">Nombre del Producto:</label>
                     <input class="controls" type="text" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre del producto." required>
                     
@@ -191,7 +191,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                     <select class="controls" name="categoriaProducto" id="categoriaProducto" required>
                         <option value="">Seleccione una categoría</option>
                         <?php
-                        include '../php/conexion.php';
+                        include '../config/conexion.php';
                         $query = "SELECT idcategoria, nombre FROM categorias";
                         $result = $conexion->query($query);
                         while ($row = $result->fetch_assoc()) {

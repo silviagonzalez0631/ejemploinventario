@@ -1,6 +1,4 @@
-<?php include '../html/navbar.php'; ?> <!-- Incluye el navbar aquí -->
-
-</header>
+<?php include '../views/navbar.php'; ?> <!-- Incluye el navbar aquí -->
 
 <!--lista de productos-->
 
@@ -64,4 +62,4 @@
     </div>
 </div>
 
-<?php include '../html/footer.php'; ?> <!-- Incluye el footer aquí -->
+<?php include '../views/footer.php'; ?> <!-- Incluye el footer aquí -->

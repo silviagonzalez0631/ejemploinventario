@@ -6,7 +6,7 @@ function cargarCategorias() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({action})
+        body: JSON.stringify({ action })
     })
     .then(response => response.json())
     .then(data => {
@@ -14,6 +14,7 @@ function cargarCategorias() {
         tbody.innerHTML = '';
         data.forEach(categoria => {
             let tr = document.createElement('tr');
+            tr.setAttribute('data-id', categoria.idcategoria); // Añade el data-id aquí
             tr.innerHTML = `
                 <td>${categoria.idcategoria}</td>
                 <td>${categoria.nombre}</td>
@@ -34,11 +35,11 @@ function abrirModalEditar(id) {
     fetch(`../php/categoria.php?id=${id}`)
     .then(response => response.json())
     .then(categoria => {
-        document.getElementById('editarIdCategoria').value = categoria.idcategoria;
-        document.getElementById('editarNombreCategoria').value = categoria.nombre;
-        document.getElementById('editarDescripcionCategoria').value = categoria.descripcion;
+        document.getElementById('idCategoria').value = categoria.idcategoria;
+        document.getElementById('nombreCategoria').value = categoria.nombre;
+        document.getElementById('descripcionCategoria').value = categoria.descripcion;
         // Mostrar el modal
-        new bootstrap.Modal(document.getElementById('editarCategoriaModal')).show();
+        new bootstrap.Modal(document.getElementById('modalEditar')).show();
     })
     .catch(error => console.error('Error:', error));
 }
@@ -46,7 +47,7 @@ function abrirModalEditar(id) {
 function eliminarCategoria(id) {
     if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
         // Realizar una solicitud AJAX para eliminar la categoría
-        fetch(`../php/eliminarcategoria.php?id=${id}`, {
+        fetch(`../php/eliminarcategorias.php?id=${id}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
@@ -67,11 +68,11 @@ function eliminarCategoria(id) {
 }
 
 // Manejar el envío del formulario de edición
-document.getElementById('editarCategoriaForm').addEventListener('submit', function(e) {
+document.getElementById('formularioEditar').addEventListener('submit', function(e) {
     e.preventDefault();
-    const id = document.getElementById('editarIdCategoria').value;
-    const nombre = document.getElementById('editarNombreCategoria').value;
-    const descripcion = document.getElementById('editarDescripcionCategoria').value;
+    const id = document.getElementById('idCategoria').value;
+    const nombre = document.getElementById('nombreCategoria').value;
+    const descripcion = document.getElementById('descripcionCategoria').value;
 
     fetch(`../php/editarcategorias.php`, {
         method: 'POST',
@@ -89,7 +90,7 @@ document.getElementById('editarCategoriaForm').addEventListener('submit', functi
         if (data.success) {
             alert('Categoría actualizada exitosamente');
             // Cerrar el modal
-            new bootstrap.Modal(document.getElementById('editarCategoriaModal')).hide();
+            new bootstrap.Modal(document.getElementById('modalEditar')).hide();
             // Recargar la lista de categorías
             cargarCategorias();
         } else {

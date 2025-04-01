@@ -11,28 +11,26 @@ function cargarProductos() {
     .then(response => response.json())
     .then(data => {
         let tbody = document.getElementById('listaProductos');
-            tbody.innerHTML = '';
-            data.forEach(producto => {
-                let tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${producto.idproducto}</td>
-                    <td><img src="${producto.imagen}" alt="${producto.nombre}" width="30"></td>
-                    <td>${producto.nombre}</td>
-                    <td>${producto.descripcion}</td>
-                    <td>${producto.precio}</td>
-                    <td>${producto.categoria}</td>
-                    <td>${producto.proveedor}</td>
-                    <td>
-                    <button class="btn btn-primary btn-sm" onclick="abrirModalEditar(${proveedor.idproveedores})">Editar</button>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarProveedor(${proveedor.idproveedores})">Eliminar</button>
+        tbody.innerHTML = '';
+        data.forEach(producto => {
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${producto.idproductos}</td>
+                <td><img src="../imagenesProductos/${producto.imagen}" alt="${producto.nombre}" width="30"></td>
+                <td>${producto.nombre}</td>
+                <td>${producto.descripcion}</td>
+                <td>${producto.precio}</td>
+                <td>${producto.categoria}</td>
+                <td>${producto.proveedor}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" onclick="abrirModalEditarProducto(${producto.idproductos})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${producto.idproductos})">Eliminar</button>
                 </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        
+            `;
+            tbody.appendChild(tr);
+        });
     })
     .catch(error => console.error('Error:', error));
-
 }
 
 function abrirModalEditarProducto(id) {

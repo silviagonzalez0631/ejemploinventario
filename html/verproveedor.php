@@ -15,9 +15,7 @@
                 <th>Telefono</th>
                 <th>Direccion</th>
                 <th>Descripcion</th>
-                <th>Botones
-                </th>
-                
+                <th>Botones</th>
             </tr>
         </thead>
         <tbody id="listaProveedores">
@@ -44,7 +42,13 @@
     </table>
 </div>
 
-
-
 <?php include '../html/footer.php'; ?> <!-- Incluye el footer aquí -->
 <?php include '../html/modaleditar.php'; ?> <!-- Incluye el modal aquí -->
+
+<script>
+    function eliminarProveedores(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+            window.location.href = '../php/eliminarproveedor.php?id=' + id;
+        }
+    }
+</script>

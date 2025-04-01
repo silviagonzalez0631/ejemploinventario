@@ -8,11 +8,17 @@ $stmt->bind_param("i", $id);
 
 $response = [];
 if ($stmt->execute()) {
-    $response['success'] = true;
+    echo "<script language='JavaScript'>
+            alert('Los datos se eliminaron correctamente de la BD');
+            location.assign('../html/verproveedor.php');
+            </script>";
 } else {
-    $response['success'] = false;
-    $response['error'] = $stmt->error; 
+    echo "<script language='JavaScript'>
+            alert('Los datos NO se eliminaron de la BD');
+            location.assign('../html/verproveedor.php');
+            </script>";
 }
 
-echo json_encode($response);
+$stmt->close();
+$conexion->close();
 ?>

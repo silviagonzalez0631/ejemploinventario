@@ -1,17 +1,24 @@
 <?php
-require_once 'conexion.php';
 
 $id = $_GET['id'];
+include_once 'conexion.php';
 $query = "DELETE FROM categorias WHERE idcategoria = ?";
 $stmt = $conexion->prepare($query);
 $stmt->bind_param("i", $id);
 
 $response = [];
 if ($stmt->execute()) {
-    $response['success'] = true;
+    echo "<script language='JavaScript'>
+            alert('Los datos se eliminaron correctamente de la BD');
+            location.assign('../html/vercategorias.php');
+            </script>";
 } else {
-    $response['success'] = false;
+    echo "<script language='JavaScript'>
+            alert('Los datos NO se eliminaron de la BD');
+            location.assign('../html/vercategorias.php');
+            </script>";
 }
 
-echo json_encode($response);
+$stmt->close();
+$conexion->close();
 ?>

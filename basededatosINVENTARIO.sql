@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-03-2025 a las 04:55:39
+-- Tiempo de generación: 03-04-2025 a las 02:47:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,8 +38,9 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`idcategoria`, `nombre`, `descripcion`) VALUES
-(1, 'verduras', 'Estos productos le dan una buena alimentación a los que compran.'),
-(2, 'Chatarra', 'comidita dañina');
+(1, 'alimentos chatarra', 'alimentos perjudiciales para la salud'),
+(2, 'frutas', 'Estos productos le dan una buena alimentación a los que compran.'),
+(3, 'comida grasosa', 'comidita dañina');
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,15 @@ CREATE TABLE `productos` (
   `IDCategoria` int(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`idproductos`, `nombre`, `descripcion`, `precio`, `imagen`, `IDProveedor`, `IDCategoria`) VALUES
+(1, 'galleta picante', 'picantes', 25000, 0x6465736361726761202831292e6a7067, 2, 1),
+(2, 'mani', 'esta rico y sirve pal estres', 600, 0x696d6167656e5f323032352d30342d30325f3139343531393238312e706e67, 3, 1),
+(3, 'mango', 'muy dulce para el paladar', 60000, 0x62663961343533392d353631612d346466352d623236312d3338323466663134366137372e6a7067, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -105,28 +115,9 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`idproveedores`, `documento`, `nombre`, `telefono`, `direccion`, `descripcion`) VALUES
-(4, 123, 'johan', 455, 'cra 5 #12-999', 'encargada del aseo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `roles`
---
-
-CREATE TABLE `roles` (
-  `idroles` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `roles`
---
-
-INSERT INTO `roles` (`idroles`, `nombre`, `descripcion`) VALUES
-(1, 'vendedor', 'Es el encargado de vender cada uno de los productos de la tienda.'),
-(2, 'comprador', 'Es el encargado de adquirir cada uno de los productos.'),
-(3, 'Distribuidor', 'Distribuye los alimentos de cada una de las tiendas');
+(1, 465896, 'Marta Isabel Pacheco', 789, 'Recreo', 'Va a estar encargada de la parte de administración de los productos que entre al almacen.'),
+(2, 4657777, 'Miguel Angel Rogel Rivera', 78999, 'Andalucia', 'Es el proveedor que trae las frutas al negocio'),
+(3, 78945, 'maria guadalupe patiño perez', 88, 'llanos', 'Es la encargada de la limpieza del negocio');
 
 -- --------------------------------------------------------
 
@@ -143,18 +134,17 @@ CREATE TABLE `usuarios` (
   `direccion` varchar(45) NOT NULL,
   `telefono` decimal(10,0) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `IDRol` int(11) NOT NULL
+  `rol_usuario` enum('administrador','vendedor','comprador') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idusuario`, `documento`, `nombre`, `apellido`, `contrasena`, `direccion`, `telefono`, `correo`, `IDRol`) VALUES
-(1, 1054284814, 'silvia', '', '12345', 'cra 4 #17-90', 3206831437, 'silviagonzalez0631@gmail.com', 1),
-(2, 46355261, 'martha', 'pacheco', '$2y$10$v04cXLwUaXUM4wzmN4Ve8.spUW9zimKXkL.zyM', 'cra1444', 3206831437, 'silvia@gmail.com', 1),
-(3, 46380292, 'sandra', 'castro', '$2y$10$AQmByE61wJN6xFMO17xtwepPtUP13nHH5TSafm', 'cra1444', 3214818299, 'silvia@gmail.com', 2),
-(4, 123456, 'silvia', 'rogel', '$2y$10$aBRZPEra9/fLA/CzAP5jn.EEFdnKk3ZMsICZMp', 'cra1444', 3205412, 'jk@gmail.com', 2);
+INSERT INTO `usuarios` (`idusuario`, `documento`, `nombre`, `apellido`, `contrasena`, `direccion`, `telefono`, `correo`, `rol_usuario`) VALUES
+(37, 1054284814, 'Silvia Daniela', 'Gonzalez Castro', '123', 'cra2#13-22', 3206831437, 'silvia@gmail.com', 'administrador'),
+(38, 46380292, 'Sandra Milena', 'Castro Laverde', '369', 'cra2#13-27', 3214818299, 'sandra@gmail.com', 'vendedor'),
+(39, 46355261, 'Johan Edison', 'Gonzalez Pacheco', '963', 'cra2#13-27', 3112430334, 'johan@gmail.com', 'comprador');
 
 -- --------------------------------------------------------
 
@@ -209,17 +199,10 @@ ALTER TABLE `proveedores`
   ADD PRIMARY KEY (`idproveedores`);
 
 --
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`idroles`);
-
---
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`idusuario`),
-  ADD KEY `FkRol` (`IDRol`);
+  ADD PRIMARY KEY (`idusuario`);
 
 --
 -- Indices de la tabla `ventas`
@@ -236,7 +219,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleventas`
@@ -254,25 +237,19 @@ ALTER TABLE `inventario`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idproductos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idproductos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `idproveedores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `idroles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idproveedores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
@@ -303,12 +280,6 @@ ALTER TABLE `inventario`
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`IDCategoria`) REFERENCES `categorias` (`idcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`IDProveedor`) REFERENCES `proveedores` (`idproveedores`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`IDRol`) REFERENCES `roles` (`idroles`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ventas`

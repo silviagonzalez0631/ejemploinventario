@@ -14,7 +14,7 @@ async function iniciarSesion(formData) {
     try {
         mostrarMensaje("iniciarsesionMessage", "Procesando inicio de sesión...", "blue");
         
-        const response = await fetch('../php/iniciarsesion.php', {
+        const response = await fetch('../models/iniciarsesion.php', {
             method: 'POST',
             body: formData
         });
@@ -24,7 +24,7 @@ async function iniciarSesion(formData) {
         if (resultado.success) {
             mostrarMensaje("loginMessage", "¡Inicio de sesión exitoso! Redirigiendo...", "green");
             setTimeout(() => {
-                window.location.href = "../html/index.php";
+                window.location.href = "../views/index.php";
             }, 2000);
         } else {
             mostrarMensaje("loginMessage", resultado.message || "Error en el inicio de sesión", "red");
@@ -38,7 +38,7 @@ async function iniciarSesion(formData) {
 // Función para cargar datos del perfil
 async function cargarDatosPerfil() {
     try {
-        const response = await fetch('../php/verperfil.php');
+        const response = await fetch('../models/verperfil.php');
         const data = await response.json();
         return data;
     } catch (error) {
@@ -50,7 +50,7 @@ async function cargarDatosPerfil() {
 // Función para actualizar perfil
 async function actualizarPerfil(datos) {
     try {
-        const response = await fetch('../php/actualizarperfil.php', {
+        const response = await fetch('../models/actualizarperfil.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

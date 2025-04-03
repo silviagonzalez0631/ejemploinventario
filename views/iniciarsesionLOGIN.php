@@ -18,6 +18,7 @@
         </video>
     </div>
     <section class="form-register">
+        <a href="principal.html">
             <img src="../public/imagenes/pedido.png" alt="hola">
         </a>
         <h2>Inicia tu sesion</h2>

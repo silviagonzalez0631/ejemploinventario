@@ -14,10 +14,10 @@
     <table class="table table-striped" id="tablaCategorias">
     <thead>
         <tr>
-        <th>ID</th>
+        <th>Id</th>
         <th>Nombre de la Categoría</th>
         <th>Descripción</th>
-        <th>Acciones</th>
+        <th>Botones</th>
         </tr>
         </thead>
         <tbody id="listaCategorias">
@@ -77,7 +77,7 @@
     <script>
         function eliminarCategoria(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta categoría?')) {
-                window.location.href = '../models/php/eliminarCategorias.php?id=' + id;
+                window.location.href = '../models/eliminarCategorias.php?id=' + id;
             }
         }
     </script>

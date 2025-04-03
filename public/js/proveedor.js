@@ -1,7 +1,7 @@
 cargarProveedores();
 function cargarProveedores() {
     const action = "cargarProveedores";
-    fetch('../models/php/proveedor.php', {
+    fetch('../models/proveedor.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ function abrirModalEditar(id) {
 function eliminarProveedor(id) {
     if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
         // Realizar una solicitud AJAX para eliminar el proveedor
-        fetch(`../models/php/eliminarproveedor.php?id=${id}`, {
+        fetch(`../models/eliminarproveedor.php?id=${id}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
@@ -82,7 +82,7 @@ document.getElementById('editarProveedorForm').addEventListener('submit', functi
     const direccion = document.getElementById('editarDireccionProveedor').value;
     const descripcion = document.getElementById('editarDescripcionProveedor').value;
 
-    fetch(`../models/php/editarproveedor.php`, {
+    fetch(`../models/editarproveedor.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

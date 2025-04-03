@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-include_once 'conexion.php';
+include_once '../config/conexion.php';
 
 try {
     // Obtener los datos del formulario

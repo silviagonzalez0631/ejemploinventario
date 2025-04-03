@@ -1,7 +1,7 @@
 // Función para cargar datos del perfil
 async function cargarDatosPerfil() {
     try {
-        const response = await fetch('..models/php/verperfil.php');
+        const response = await fetch('../models/verperfil.php');
         const datos = await response.json();
         return datos;
     } catch (error) {

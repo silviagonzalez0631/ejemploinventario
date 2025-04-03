@@ -1,7 +1,7 @@
 cargarProductos();
 function cargarProductos() {
     const action = "cargarProductos";
-    fetch('../models/php/producto.php', {
+    fetch('../models/producto.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ function cargarProductos() {
 
 function abrirModalEditarProducto(id) {
     // Obtener los datos del producto y llenar el formulario del modal
-    fetch(`../php/producto.php?id=${id}`)
+    fetch(`../models/producto.php?id=${id}`)
     .then(response => response.json())
     .then(producto => {
         document.getElementById('editarIdProducto').value = producto.idproductos;
@@ -53,7 +53,7 @@ function abrirModalEditarProducto(id) {
 function eliminarProducto(id) {
     if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
         // Realizar una solicitud AJAX para eliminar el producto
-        fetch(`../php/producto.php?id=${id}`, {
+        fetch(`../models/producto.php?id=${id}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
@@ -83,7 +83,7 @@ document.getElementById('editarProductoForm').addEventListener('submit', functio
     const categoria = document.getElementById('editarCategoriaProducto').value;
     const proveedor = document.getElementById('editarProveedorProducto').value;
 
-    fetch(`../models/php/editarproducto.php`, {
+    fetch(`../models/editarproducto.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

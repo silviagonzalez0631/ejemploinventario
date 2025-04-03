@@ -19,12 +19,13 @@
         </video>
     </div>
     <section class="form-register">
+        <a href="principal.html">
             <img src="../public/imagenes/pedido.png" alt="hola">
         </a>
         <h2>¿No tienes cuenta?</h2>
         <h4>¡Registrate para comenzar!</h4>
 
-        <form action="../models/php/registro.php" method="POST">
+        <form action="../models/registro.php" method="POST">
         
             <label for="documentoRegistro">Documento:</label>
             <input class="controls" type="text" name="documento" id="documentoRegistro" placeholder="Ingrese su documento." required>

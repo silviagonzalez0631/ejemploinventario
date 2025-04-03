@@ -1,5 +1,5 @@
 <?php
-require_once 'conexion.php';
+require_once '../config/conexion.php';
 
 $id = $_GET['id'];
 $query = "DELETE FROM proveedores WHERE idproveedores = ?";

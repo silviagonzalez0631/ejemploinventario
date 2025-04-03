@@ -299,15 +299,15 @@
 
 
 <!--Formulario para registrar usuarios-->
-<div id="info-objeto">
+
 <section id="contenedor-registro my-6">
 <div class="contenedor-registro">
-    <h1> Formulario para el registro de objetos</h1>
+    <h1> Formulario para el registro del usuario</h1>
     <form>
 
         <div class="form-group">
-            <label1> Nombre del objeto:</label1>
-            <input type="text" id="nombreObjeto" name="nombreObjeto" placeholder="Ingrese su objeto" required>
+            <label1> Nombre del usuario:</label1>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
             
         </div>
         <br>
@@ -315,30 +315,28 @@
 
         <div class="form-group">
             <label2> Correo electronico:</label2>
-            <input type="text" id="correoObjeto" name="correoObjeto"
-                placeholder="Ingrese el correo de su objeto" required>
+            <input type="text" id="correo" name="correo"
+                placeholder="Ingrese su correo electronico" required>
         </div>
         <br>
 
         <div class="form-group">
             <label3> Numero de telefono</label3>
-            <input type="text" id="telefonoObjeto" name="telefonoObjeto"
-            placeholder="Introduce su numero de objetos" required>
+            <input type="text" id="telefono" name="telefono"
+            placeholder="Introduce su numero de telefono" required>
             
         </div>
         <br>
         <br>
 
         <div class="form-group">
-            <button type="submit"> Guardar objeto </button>
+            <button type="submit"> Guardar usuario </button>
 
         </div>
         
     </form>
 </div>
 </section>
-</div>
-
 
 
 

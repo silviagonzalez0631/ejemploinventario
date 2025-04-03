@@ -70,7 +70,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                     </button>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="../models/php/cerrarsesion.php">Cerrar Sesión</a>
+                <a class="nav-link" href="../models/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
             </ul>
             <!-- Mostrar el tipo de usuario en la barra de navegación -->
@@ -120,7 +120,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../models/php/categoria.php" method="POST">
+                <form action="../models/categoria.php" method="POST">
                     <label for="nombreCategoria">Nombre de la Categoría:</label>
                     <input class="controls" type="text" name="nombreCategoria" id="nombreCategoria" placeholder="Ingrese el nombre de la categoría." required>
                     
@@ -144,7 +144,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../models/php/proveedor.php" method="POST">
+                <form action="../models/proveedor.php" method="POST">
                     <label for="documentoProveedor">Documento:</label>
                     <input class="controls" type="number" name="documentoProveedor" id="documentoProveedor" placeholder="Ingrese el documento del proveedor." required>
 
@@ -177,7 +177,7 @@ $rol = $_SESSION['rol_usuario'] ?? null;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../models/php/producto.php" method="POST" enctype="multipart/form-data">
+                <form action="../models/producto.php" method="POST" enctype="multipart/form-data">
                     <label for="nombreProducto">Nombre del Producto:</label>
                     <input class="controls" type="text" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre del producto." required>
                     

@@ -43,12 +43,11 @@
 </div>
 
 <?php include '../views/footer.php'; ?> <!-- Incluye el footer aquí -->
-<?php include '../html/modaleditar.php'; ?> <!-- Incluye el modal aquí -->
 
 <script>
     function eliminarProveedores(id) {
         if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
-            window.location.href = '../models/php/eliminarproveedor.php?id=' + id;
+            window.location.href = '../models/eliminarproveedor.php?id=' + id;
         }
     }
 </script>
